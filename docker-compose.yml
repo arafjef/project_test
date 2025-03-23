@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./data/users.json:/app/data/users.json
