@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "fa923f9c-3931-4a21-b74f-98f5471bcf63",
+		"name": "project_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13734180"
+	},
+	"item": [
+		{
+			"name": "api_intro_check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/\r\n# → \"API is running!\"\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_add_user_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    if (pm.response.code !== 201) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let id = bodyData.id\r",
+							"pm.collectionVariables.set(\"user_id_1\", id)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Martin\",\r\n    \"email\": \"martin@example.com\",\r\n    \"country\": \"CZ\",\r\n    \"age\": \"24\",\r\n    \"job\": \"cestovatel\",\r\n    \"hobbies\": \"gaučing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/users \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\"name\": \"Alice\", \"email\": \"alice@example.com\"}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_add_user_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 201\", () => {\r",
+							"    if (pm.response.code !== 201) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let id = bodyData.id\r",
+							"pm.collectionVariables.set(\"user_id_2\", id)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Petr\",\r\n    \"email\": \"petrjelotr@example.com\",\r\n    \"country\": \"SK\",\r\n    \"age\": \"31\",\r\n    \"job\": \"fotograf\",\r\n    \"hobbies\": \"party\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/users \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\"name\": \"Alice\", \"email\": \"alice@example.com\"}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_user_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let user_1 = pm.collectionVariables.get(\"user_id_1\")\r",
+							"let user_2 = pm.collectionVariables.get(\"user_id_2\")\r",
+							"console.log(user_1)\r",
+							"console.log(user_2)\r",
+							"\r",
+							"pm.test(\"User 1 exist\", () => {\r",
+							"    pm.expect(bodyData[0].id).to.equal(user_1)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User 2 exist\", () => {\r",
+							"    pm.expect(bodyData[1].id).to.equal(user_2)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/users\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_specific_user_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{user_id_1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{user_id_1}}"
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/users/Alice\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_specific_user_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{user_id_1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{user_id_1}}"
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/users/Alice\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_delete_user_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 204\", () => {\r",
+							"    if (pm.response.code !== 204) {\r",
+							"        let errorMessage = pm.response.json().error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{user_id_1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{user_id_1}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE http://localhost:8080/users/1234-5678-abcd\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_user_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let user_1 = pm.collectionVariables.get(\"user_id_1\")\r",
+							"\r",
+							"console.log(user_1)\r",
+							"\r",
+							"\r",
+							"pm.test(\"User 1 does not exist\", () => {\r",
+							"    pm.expect(bodyData).is.not.contain(user_1)\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/users\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_delete_user_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 204\", () => {\r",
+							"    if (pm.response.code !== 204) {\r",
+							"        let errorMessage = pm.response.json().error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{user_id_2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{user_id_2}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE http://localhost:8080/users/1234-5678-abcd\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "api_user_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let bodyData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    if (pm.response.code !== 200) {\r",
+							"        let errorMessage = bodyData.error.error_description;\r",
+							"        console.error(`ERROR! Status code: ${pm.response.code} - ${errorMessage}`);\r",
+							"    }\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let user_2 = pm.collectionVariables.get(\"user_id_2\")\r",
+							"\r",
+							"console.log(user_2)\r",
+							"\r",
+							"\r",
+							"pm.test(\"User 2 does not exist\", () => {\r",
+							"    pm.expect(bodyData).is.not.contain(user_2)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl http://localhost:8080/users\r\n"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_id_1",
+			"value": ""
+		},
+		{
+			"key": "user_id_2",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
