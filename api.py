@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 import uuid, json, os
 
 app = Flask(__name__)
@@ -34,7 +34,6 @@ def add_user():
     new_user = request.json
     required_fields = ["name"]
 
-    # 🔎 Zkontroluj, že 'name' je přítomné
     for field in required_fields:
         if field not in new_user:
             return jsonify({
@@ -43,10 +42,8 @@ def add_user():
                 }
             }), 400
 
-    # 🆔 Vygeneruj unikátní ID
     user_id = str(uuid.uuid4())
 
-    # 🧾 Sestav nového uživatele
     user_with_id = {
         "id": user_id,
         "name": new_user["name"],
@@ -57,11 +54,9 @@ def add_user():
         "hobbies": new_user.get("hobbies", "")
     }
 
-    # 📥 Ulož do seznamu a souboru
     data["users"].append(user_with_id)
     save_data()
 
-    # ✅ Odpověď klientovi
     return jsonify({
         "message": "User added",
         "id": user_id
@@ -85,7 +80,6 @@ def delete_user(user_id):
     global data
     user = next((u for u in data["users"] if u["id"] == user_id), None)
 
-    # 🧯 Pokud uživatel neexistuje
     if not user:
         return jsonify({
             "error": {
@@ -93,12 +87,11 @@ def delete_user(user_id):
             }
         }), 404
 
-    # 🗑️ Smaž uživatele a ulož
     data["users"] = [u for u in data["users"] if u["id"] != user_id]
     save_data()
     return '', 204
 
-# 🚨 Globální handler pro neočekávané chyby (vrací JSON)
+# 🚨 Globální handler pro neočekávané chyby
 @app.errorhandler(Exception)
 def handle_exception(e):
     return jsonify({
@@ -107,6 +100,6 @@ def handle_exception(e):
         }
     }), 500
 
-# ▶️ Spuštění aplikace na všech IP, port 5000
+# ▶️ Spuštění aplikace
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

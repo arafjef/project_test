@@ -1,22 +1,3 @@
 {
-  "users": [
-    {
-      "id": "00f93a9b-549b-4f2b-9181-f47c23be0674",
-      "name": "Petr",
-      "email": "petrjelotr@example.com",
-      "country": "SK",
-      "age": "31",
-      "job": "fotograf",
-      "hobbies": "party"
-    },
-    {
-      "id": "fa7433d2-2b39-4927-8110-571f7d23c842",
-      "name": "Adam",
-      "email": "adam@example.com",
-      "country": "CZ",
-      "age": "29",
-      "job": "test_analyst",
-      "hobbies": "sport"
-    }
-  ]
+  "users": []
 }
